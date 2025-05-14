@@ -603,6 +603,10 @@ export default function TaskChecklist() {
                 className="h-6" // 높이 조절 가능 (6 = 약 24px)
                 tabIndex={-1}
               />
+              {/* 안내 문구 */}
+              <p className="text-xs text-gray-400 mt-2 text-center">
+                "일반던전은 은화 떨어지고, 심층은 공물 차감돼요... 그 외는 기타로 해주세요!! 부탁해요오!!"
+              </p>
             </form>
           </DialogContent>
         </Dialog>
