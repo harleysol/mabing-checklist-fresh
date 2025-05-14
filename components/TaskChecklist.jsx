@@ -494,6 +494,11 @@ export default function TaskChecklist() {
                 </select>
               </label>
 
+              {/* 안내 문구 */}
+              <p className="text-xs text-gray-400 mt-2 text-center">
+                "일반던전은 은화 떨어지고, 심층은 공물 차감돼요... 그 외는 기타로 해주세요!! 부탁해요오!!"
+              </p>
+
               <label className="block">
                 <span className={taskSubmitted && taskFormErrors.resetFreq ? 'text-red-500' : 'text-black'}>
                   초기화 주기 (*필수) :
@@ -603,10 +608,6 @@ export default function TaskChecklist() {
                 className="h-6" // 높이 조절 가능 (6 = 약 24px)
                 tabIndex={-1}
               />
-              {/* 안내 문구 */}
-              <p className="text-xs text-gray-400 mt-2 text-center">
-                "일반던전은 은화 떨어지고, 심층은 공물 차감돼요... 그 외는 기타로 해주세요!! 부탁해요오!!"
-              </p>
             </form>
           </DialogContent>
         </Dialog>
@@ -721,7 +722,7 @@ export default function TaskChecklist() {
                 <span className="text-sm text-gray-600">
                   {newImageFile ? newImageFile.name : '선택된 파일 없음'}
                 </span>
-                {previewUrl && (
+                {previewUrl && previewUrl !== '/default.png' && (
                   <img
                     src={previewUrl}
                     alt="미리보기"
@@ -730,14 +731,21 @@ export default function TaskChecklist() {
                 )}
               </div>
 
+              {/* 안내 문구 추가 */}
+              <p className="text-sm text-center text-gray-500 mb-2">
+                🛠 업데이트 후 열어드릴게요!
+              </p>
+
+              {/* 현재 은화 (비활성화) */}
               <label className="block text-black">
-                현재 은화 (선택) :
+                현재 은화 (비활성화 중) :
                 <Input
                   // 1) 모바일에서 숫자키보드 띄우기, 숫자만 허용하라는 힌트
                   inputMode="numeric"
                   pattern="\d*"
                   placeholder="0"
                   value={newSilver}
+                  disabled // 🔒 비활성화!
                   // 2) 숫자가 아닌 문자는 모두 제거
                   onChange={e => {
                     const digitsOnly = e.target.value.replace(/\D/g, '')
@@ -746,14 +754,15 @@ export default function TaskChecklist() {
                   className="mt-1 w-20 bg-white text-black border border-gray-300"
                 />
               </label>
-
+              {/* 현재 공물 (비활성화) */}
               <label className="block text-black">
-                현재 공물 (선택) :
+                현재 공물 (비활성화 중) :
                 <Input
                   inputMode="numeric"
                   pattern="\d*"
                   placeholder="0"
                   value={newTribute}
+                  disabled
                   onChange={e => {
                     const digitsOnly = e.target.value.replace(/\D/g, '')
                     setNewTribute(digitsOnly)
@@ -761,11 +770,12 @@ export default function TaskChecklist() {
                   className="mt-1 w-20 bg-white text-black border border-gray-300"
                 />
               </label>
-
+              {/* 은화 충전 분 (비활성화) */}
               <label className="block text-black">
-                은화 충전 분 (선택) :
+                은화 충전 분 (비활성화 중) :
                 <select
                   value={newSilverStart}
+                  disabled
                   onChange={e => setNewSilverStart(e.target.value)}
                   className="ml-2 mt-1 w-20 bg-white text-black border border-gray-300 p-1 rounded"
                 >
@@ -775,11 +785,12 @@ export default function TaskChecklist() {
                   ))}
                 </select>
               </label>
-
+              {/* 공물 충전 시간 (비활성화) */}
               <label className="block text-black">
-                공물 충전 시간 (선택) :
+                공물 충전 시간 (비활성화 중) :
                 <select
                   value={newTributeStart}
+                  disabled
                   onChange={e => setNewTributeStart(e.target.value)}
                   className="ml-2 mt-1 w-20 bg-white text-black border border-gray-300 p-1 rounded"
                 >
