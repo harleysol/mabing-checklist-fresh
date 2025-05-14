@@ -388,7 +388,7 @@ export default function TaskChecklist() {
     <div className="p-6 bg-gray-800 text-white rounded-2xl shadow-xl overflow-auto">
       <h1 className="text-2xl font-bold mb-6 text-center flex items-center justify-center gap-2">
         <img src="/mabing-icon.png" alt="마빙이" className="w-30 h-30 mt-5" />
-        마빙이 체크리스트 ✨ 테스트 중!
+        마빙이 체크리스트
       </h1>
 
       {/* 캐릭터 필터 */}
