@@ -55,8 +55,15 @@ export default function TaskChecklist() {
     const [taskFormErrors, setTaskFormErrors] = useState<TaskFormErrors>({});
     const [charFormErrors, setCharFormErrors] = useState({});
     const [taskSubmitted, setTaskSubmitted] = useState(false);
-    const ExportImportButtons = dynamic(() => import('./ExportImportButtons.tsx'), { ssr: false });
-    const FeedbackDialog = dynamic(() => import('./FeedbackDialog.tsx'), { ssr: false });
+    const ExportImportButtons = dynamic(() =>
+        import('./ExportImportButtons.tsx').then(mod => mod.default),
+        { ssr: false }
+    );
+
+    const FeedbackDialog = dynamic(() =>
+        import('./FeedbackDialog.tsx').then(mod => mod.default),
+        { ssr: false }
+    );
     const [isTaskOpen, setIsTaskOpen] = useState(false);
     const [isCharOpen, setIsCharOpen] = useState(false);
     const [editingChar, setEditingChar] = useState<GameCharacterData | null>(null);
