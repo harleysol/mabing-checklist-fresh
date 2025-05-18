@@ -19,6 +19,7 @@ import { useVisibleTasks } from '@/hooks/useVisibleTasks';
 import type { GameCharacterData, TaskData } from '@/types';
 import { devLog } from '@/utils/dev';
 import { convertToBase64 } from '@/utils/image';
+import { resetTasksBySchedule } from '@/utils/resetTasksBySchedule';
 import { getResetTaskState } from '@/utils/tasks';
 import { Plus, Trash2 } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -45,6 +46,8 @@ devLog('DialogFooter:', DialogFooter);
 devLog('DialogHeader:', DialogHeader);
 devLog('DialogTitle:', DialogTitle);
 devLog('DialogTrigger:', DialogTrigger);
+devLog('✨ 일간 초기화 실행됨!');
+devLog('🔄 주간 초기화 실행됨!');
 
 export default function TaskChecklist() {
     const [isClient, setIsClient] = useState(false);
@@ -292,7 +295,22 @@ export default function TaskChecklist() {
     };
 
     useEffect(() => {
+        resetTasksBySchedule(setTasks, setTaskValues, tasks);
+    }, [setTasks, setTaskValues, tasks]);
+
+
+    useEffect(() => {
         setIsClient(true);
+    }, []);
+
+    useEffect(() => {
+        devLog('tasks 상태:', tasks);
+        devLog('taskValues 상태:', taskValues);
+    }, [tasks, taskValues]);
+
+    useEffect(() => {
+        console.log('tasks:', JSON.stringify(tasks, null, 2));
+        console.log('taskValues:', JSON.stringify(taskValues, null, 2));
     }, []);
 
     if (!isClient) return null;
