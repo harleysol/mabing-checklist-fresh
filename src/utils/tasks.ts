@@ -40,7 +40,7 @@ export function shouldResetTask(task: TaskData): boolean {
     const last = new Date(task.lastCompletedAt);
     const now = new Date();
 
-    if (task.resetFreq === '일간') {
+    if (task.resetFreq === 'daily') {
         return (
             now.getFullYear() !== last.getFullYear() ||
             now.getMonth() !== last.getMonth() ||
@@ -48,7 +48,7 @@ export function shouldResetTask(task: TaskData): boolean {
         );
     }
 
-    if (task.resetFreq === '주간') {
+    if (task.resetFreq === 'weekly') {
         // 일요일 기준으로 주차 계산 (ISO Week는 사용 안 함)
         const getWeekStart = (date: Date) => {
             const d = new Date(date);
